@@ -12,21 +12,21 @@ such that nums[i] = nums[j] and the difference between i and j is at most k.
 """
 
 class Solution(object):
-    def containsDuplicate(self, nums):
-        nums_dic = {}
-        for ele in nums:
-            if ele in nums_dic:
-                return True
+    def containsNearbyDuplicate(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: bool
+        """
+        Flag = False
+        num_dic = {}
+        for i in range(len(nums)):
+            if nums[i] in num_dic and i-num_dic[nums[i]]<=k:
+                Flag = True
+                break
             else:
-                nums_dic[ele] = 1
-        return False
-
-    def containsDuplicate(self, nums):
-        nums_set = set(nums)
-        if len(nums_set)<len(nums):
-            return True
-        else:
-            return False
+                num_dic[nums[i]]=i
+        return Flag
 
 
 
@@ -34,9 +34,9 @@ class Solution(object):
 if __name__=="__main__":
     L1 = [1,3,5,7, 0]
     L2 = [2,4,6,8]
-    L2 = [3,2,3,3]
+    L2 = [2,2]
     #L2 = [1,1]
 
     Solution_obj = Solution()
 
-    print Solution_obj.containsDuplicate(L2)
+    print Solution_obj.containsNearbyDuplicate(L2,3)
